@@ -14,6 +14,7 @@ Droid through reviewed pull requests.
 | `scripts/catalog_check.py` | Deterministic catalog and source validation. |
 | `scripts/materialize.py` | Dry-run, check, and guarded copy installer. |
 | `tests/` | Offline unit tests and small synthetic fixtures. |
+| `tests/probes/` | Manual pinned-toolchain probes (not part of dependency-free CI). |
 | `.github/workflows/ci.yml` | Public, dependency-free CI checks. |
 
 ## Validation
@@ -29,6 +30,15 @@ python3 scripts/materialize.py --check --profile profiles/<x>.json --source .
 The materializer is a dry run unless `--apply` is supplied. Profiles may use
 runtime-specific home placeholders, so configure those placeholders before a
 check or install.
+
+Pinned probes are manual, require a network install of the pinned toolchain,
+and are not part of CI:
+
+```sh
+cd tests/probes/zod-variant-mapping
+npm install --ignore-scripts --no-audit --no-fund
+node variant-mapping.mjs
+```
 
 ## Review policy
 

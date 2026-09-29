@@ -134,7 +134,8 @@ When adding a variant:
 1. Add a schema with a unique literal `kind` and explicit `version`.
 2. Add it to the discriminated union used by the ingress adapter.
 3. Decide which boundaries accept the new variant.
-4. Add valid, wrong-kind, missing-field, and unknown-field tests.
+4. Add valid, wrong-kind, wrong-version, missing-field, and unknown-field
+   tests.
 5. Regenerate or review derived JSON Schema and update downstream contracts.
 6. Add domain-policy handling separately; parsing a variant is not permission.
 
@@ -169,8 +170,9 @@ API contract.
 | `invalid_type` at a required field | `input.type` (this example's mapping; use `input.required` only when your adapter distinguishes the missing case) |
 | `unrecognized_keys` | `input.unknown_field` |
 | `invalid_format` | `input.format` |
-| Invalid `kind` or `version` discriminator | `input.variant` |
-| Any other issue | `input.invalid` |
+| `invalid_union` at the `kind` discriminator (no variant matched) | `input.variant` |
+| `invalid_value` at a variant discriminator field (`kind` or `version`) | `input.variant` |
+| Any other issue, including `invalid_value` at a non-discriminator field | `input.invalid` |
 
 The adapter can preserve the path for diagnostics while exposing only the
 domain code:
@@ -185,11 +187,16 @@ type DomainError = {
 
 type DomainResult<T> = { ok: true; value: T } | DomainError;
 
+const VARIANT_FIELDS: readonly PropertyKey[] = ["kind", "version"];
+
 function mapIssue(issue: { code: string; path: PropertyKey[] }): DomainError {
+  const atVariantField =
+    issue.path.length === 1 && VARIANT_FIELDS.includes(issue.path[0]);
   const code =
     issue.code === "unrecognized_keys" ? "input.unknown_field" :
     issue.code === "invalid_format" ? "input.format" :
     issue.code === "invalid_union" ? "input.variant" :
+    issue.code === "invalid_value" && atVariantField ? "input.variant" :
     issue.code === "invalid_type" ? "input.type" : "input.invalid";
   return { ok: false, code, path: issue.path };
 }
@@ -206,6 +213,17 @@ domain error with `input.type` and the `age` path. For a valid object with an
 integer age and timestamp, it returns the parsed data. A transport adapter can
 turn those codes into an HTTP response, queue rejection, or log event without
 depending on Zod's message wording.
+
+Variant failures have a pinned shape under Zod v4.6.5. An unknown `kind`
+fails the union with `invalid_union` reported at the `kind` path, because no
+variant matches the discriminator. A known `kind` with an unsupported
+`version` selects its variant and then fails the `version` literal with
+`invalid_value` at the `version` path. Both mean the payload identifies a
+variant this boundary does not support, so both surface as `input.variant`.
+Keep the `invalid_value` rule scoped to the variant fields: an ordinary
+literal or enum mismatch elsewhere (for example a `state` field) stays
+`input.invalid`. `tests/probes/zod-variant-mapping/` pins these cases against
+Zod 4.6.5.
 
 ## Zod v4 landmines
 
@@ -232,8 +250,8 @@ memory:
 
 An executable probe for the refinement rules should assert the throw on key
 overwrite, success for `.safeExtend()`, and success for adding a new key with
-`.extend()`. Keep that probe in verification tooling rather than in a
-production boundary adapter.
+`.extend()`. Keep that probe in verification tooling (`tests/probes/`) rather
+than in a production boundary adapter.
 
 ## Anti-patterns
 
@@ -289,9 +307,15 @@ Boundary tests should assert domain behavior rather than library prose:
   and `z.coerce.number()` edge cases explicitly.
 - Assert `input.required`, `input.type`, `input.unknown_field`,
   `input.format`, `input.variant`, or `input.invalid`, never a Zod message.
+- Assert `input.variant` for an unknown `kind` and for a wrong `version` on a
+  matched `kind`, and `input.invalid` for an ordinary non-discriminator
+  literal mismatch, so the variant rule cannot over-map.
 - Add a strict-mode gotcha test proving that an otherwise coercible value is
   rejected until the adapter normalizes it.
 - If a separate schema is published, compare required fields, types, enum
   values, formats, and additional-property behavior in a parity test.
 - Run a pinned v4 probe for refinement overwrite, `.safeExtend()`, new-key
   `.extend()`, top-level `z.email()`, and `z.toJSONSchema()`.
+- Run the pinned Zod 4.6.5 variant-mapping probe in
+  `tests/probes/zod-variant-mapping/` when changing the envelope or mapping
+  rules.

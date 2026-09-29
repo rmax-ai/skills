@@ -33,7 +33,7 @@
       "description": "Validate untrusted TypeScript boundary data with Zod v4 and map issues to stable domain codes.",
       "owner": "rmax-ai",
       "source_path": "portable/zod-boundary-validation",
-      "source_hash": "c4761d99cbe62fe2155ab5ffa32a7cf52d9cc9538ad832a217842c4f4e189fc7",
+      "source_hash": "bf75b39bf41d90263c216ed61b1747dffce6915c201cf40b49aa36c44fdd7eb7",
       "compatibility": {
         "runtimes": [
           "hermes",
