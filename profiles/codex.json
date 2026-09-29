@@ -1,0 +1,7 @@
+{
+  "id": "codex",
+  "runtime": "codex",
+  "install_root": "~/.codex/skills",
+  "mode": "copy",
+  "notes": "canonical single root; ~/.agents/skills intentionally not targeted (single-exposure rule)"
+}

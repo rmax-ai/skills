@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "catalog_version": "1.0.0",
+  "skills": [
+    {
+      "id": "pydantic-boundary-validation",
+      "name": "Pydantic Boundary Validation",
+      "description": "Validate untrusted Python boundary data with Pydantic v2 and map failures to stable domain codes.",
+      "owner": "rmax-ai",
+      "source_path": "portable/pydantic-boundary-validation",
+      "source_hash": "1a5f978101cbcbdf36c10258da6a577e92a40655ff5dbe5af1738386c416ec0a",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "python>=3.10",
+          "pydantic>=2"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#13",
+        "issue": "rmax-ai/delegation-queue#105"
+      }
+    },
+    {
+      "id": "zod-boundary-validation",
+      "name": "Zod Boundary Validation",
+      "description": "Validate untrusted TypeScript boundary data with Zod v4 and map issues to stable domain codes.",
+      "owner": "rmax-ai",
+      "source_path": "portable/zod-boundary-validation",
+      "source_hash": "c4761d99cbe62fe2155ab5ffa32a7cf52d9cc9538ad832a217842c4f4e189fc7",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "node>=18",
+          "zod>=4"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#13",
+        "issue": "rmax-ai/delegation-queue#105"
+      }
+    }
+  ],
+  "hash_rule": "source_hash = sha256 over sorted lines '<posix_relpath> <sha256(file_hex)>\\n' for all files under source_path, sorted by relpath"
+}
