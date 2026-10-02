@@ -172,7 +172,7 @@ API contract.
 | `invalid_format` | `input.format` |
 | `invalid_union` at the `kind` discriminator (no variant matched) | `input.variant` |
 | `invalid_value` at a variant discriminator field (`kind` or `version`) | `input.variant` |
-| Any other issue, including `invalid_value` at a non-discriminator field | `input.invalid` |
+| Any other issue, including `invalid_value` or `invalid_union` at a non-discriminator field | `input.invalid` |
 
 The adapter can preserve the path for diagnostics while exposing only the
 domain code:
@@ -195,7 +195,7 @@ function mapIssue(issue: { code: string; path: PropertyKey[] }): DomainError {
   const code =
     issue.code === "unrecognized_keys" ? "input.unknown_field" :
     issue.code === "invalid_format" ? "input.format" :
-    issue.code === "invalid_union" ? "input.variant" :
+    issue.code === "invalid_union" && atVariantField ? "input.variant" :
     issue.code === "invalid_value" && atVariantField ? "input.variant" :
     issue.code === "invalid_type" ? "input.type" : "input.invalid";
   return { ok: false, code, path: issue.path };
@@ -220,10 +220,11 @@ variant matches the discriminator. A known `kind` with an unsupported
 `version` selects its variant and then fails the `version` literal with
 `invalid_value` at the `version` path. Both mean the payload identifies a
 variant this boundary does not support, so both surface as `input.variant`.
-Keep the `invalid_value` rule scoped to the variant fields: an ordinary
+Keep both discriminator rules scoped to the variant fields: an ordinary
 literal or enum mismatch elsewhere (for example a `state` field) stays
-`input.invalid`. `tests/probes/zod-variant-mapping/` pins these cases against
-Zod 4.6.5.
+`input.invalid`, and a non-discriminator `z.union(...)` failure is not a
+variant error either. `tests/probes/zod-variant-mapping/` pins these cases
+against Zod 4.6.5.
 
 ## Zod v4 landmines
 
@@ -309,7 +310,8 @@ Boundary tests should assert domain behavior rather than library prose:
   `input.format`, `input.variant`, or `input.invalid`, never a Zod message.
 - Assert `input.variant` for an unknown `kind` and for a wrong `version` on a
   matched `kind`, and `input.invalid` for an ordinary non-discriminator
-  literal mismatch, so the variant rule cannot over-map.
+  literal mismatch and for a non-discriminator `z.union(...)` failure, so the
+  variant rules cannot over-map.
 - Add a strict-mode gotcha test proving that an otherwise coercible value is
   rejected until the adapter normalizes it.
 - If a separate schema is published, compare required fields, types, enum

@@ -11,6 +11,7 @@ raw Zod issue `code`/`path` and the domain code produced by the documented
 2. unknown `kind` — `invalid_union` @ `["kind"]` → `input.variant`.
 3. known `kind` + wrong `version` — `invalid_value` @ `["version"]` → `input.variant`.
 4. ordinary non-discriminator literal mismatch — `invalid_value` @ `["state"]` → `input.invalid`.
+5. ordinary non-discriminator union failure — `invalid_union` @ `["retry"]` → `input.invalid`.
 
 Run (requires Node and network access for the pinned install; not part of the
 dependency-free CI):

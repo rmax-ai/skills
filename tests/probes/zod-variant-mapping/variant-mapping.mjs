@@ -7,7 +7,8 @@
 //   1. unknown `kind`                       -> invalid_union @ ["kind"]   -> input.variant
 //   2. known `kind` + unsupported `version` -> invalid_value @ ["version"] -> input.variant
 //   3. non-discriminator literal mismatch   -> invalid_value @ ["state"]   -> input.invalid
-//   4. valid envelope control               -> parses without issues
+//   4. non-discriminator union failure      -> invalid_union @ ["retry"]   -> input.invalid
+//   5. valid envelope control               -> parses without issues
 //
 // Manual run (not part of the dependency-free CI):
 //
@@ -69,6 +70,13 @@ const accountSchema = z.strictObject({
   state: z.literal("active"),
 });
 
+// A schema with an ordinary (non-discriminator) z.union(...) whose failure
+// must NOT map to the variant code.
+const jobRequestSchema = z.strictObject({
+  mode: z.literal("batch"),
+  retry: z.union([z.string(), z.number().int()]),
+});
+
 // The documented adapter mapping — mirror of mapIssue() in the skill.
 const VARIANT_FIELDS = ["kind", "version"];
 function mapIssue(issue) {
@@ -77,7 +85,7 @@ function mapIssue(issue) {
   const code =
     issue.code === "unrecognized_keys" ? "input.unknown_field" :
     issue.code === "invalid_format" ? "input.format" :
-    issue.code === "invalid_union" ? "input.variant" :
+    issue.code === "invalid_union" && atVariantField ? "input.variant" :
     issue.code === "invalid_value" && atVariantField ? "input.variant" :
     issue.code === "invalid_type" ? "input.type" : "input.invalid";
   return { code, path: issue.path };
@@ -114,6 +122,13 @@ const cases = [
     schema: accountSchema,
     input: { email: "a@example.test", state: "paused" },
     issue: { code: "invalid_value", path: ["state"] },
+    domain: "input.invalid",
+  },
+  {
+    name: "non-discriminator union failure",
+    schema: jobRequestSchema,
+    input: { mode: "batch", retry: true },
+    issue: { code: "invalid_union", path: ["retry"] },
     domain: "input.invalid",
   },
 ];
