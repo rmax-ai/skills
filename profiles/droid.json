@@ -1,0 +1,6 @@
+{
+  "id": "droid",
+  "runtime": "droid",
+  "install_root": "~/.factory/skills",
+  "mode": "copy"
+}

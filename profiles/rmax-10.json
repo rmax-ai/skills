@@ -1,0 +1,7 @@
+{
+  "id": "rmax-10",
+  "runtime": "hermes",
+  "install_root": "<HERMES_HOME>/skills/engineering",
+  "mode": "copy",
+  "notes": "default Hermes profile; research profile follows via symlink layer"
+}
