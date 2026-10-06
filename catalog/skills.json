@@ -51,6 +51,29 @@
         "adr": "rmax-ai/architecture#13",
         "issue": "rmax-ai/delegation-queue#105"
       }
+    },
+    {
+      "id": "slack-queue-state-reactions",
+      "name": "Slack Queue-State Reactions",
+      "description": "Expose bounded queue state on chat handoff messages with a small derived reaction set (configured waiting and active markers; no more than two active items globally), with reconciliation from the durable queue after restart or duplicate delivery.",
+      "owner": "rmax-ai",
+      "source_path": "portable/slack-queue-state-reactions",
+      "source_hash": "61c12b5b91bf339c5e1dca08838c3467e30a90cdb965e77836649c63ea23168a",
+      "compatibility": {
+        "runtimes": [
+          "hermes"
+        ],
+        "required_capabilities": [
+          "chat platform with optional reaction support",
+          "durable work queue"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#2",
+        "issue": "rmax-ai/delegation-queue#149"
+      }
     }
   ],
   "hash_rule": "source_hash = sha256 over sorted lines '<posix_relpath> <sha256(file_hex)>\\n' for all files under source_path, sorted by relpath"
