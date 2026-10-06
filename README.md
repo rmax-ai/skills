@@ -1,6 +1,7 @@
 # Portable agent skills
 
-This repository contains small, runtime-neutral skills for boundary validation.
+This repository contains small, runtime-neutral skills for boundary validation
+and bounded agent-workflow protocols.
 The source is public and is intended to be installed into Hermes, Codex, or
 Droid through reviewed pull requests.
 

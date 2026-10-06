@@ -93,3 +93,26 @@ class SkillContentTests(unittest.TestCase):
                 if path.is_file():
                     text = path.read_text(encoding="utf-8")
                     self.assertIsNone(marker_pattern.search(text), path.as_posix())
+
+    def test_slack_queue_state_required_content(self) -> None:
+        text = (
+            ROOT / "portable" / "slack-queue-state-reactions" / "SKILL.md"
+        ).read_text(encoding="utf-8")
+        for token in (
+            "waiting",
+            "active",
+            "At most **two** active",
+            "reconcil",
+            "entity-mention",
+            "capability-gated",
+        ):
+            self.assertIn(token, text)
+        self.assertIn("## Reconciliation", text)
+        checklist = (
+            ROOT
+            / "portable"
+            / "slack-queue-state-reactions"
+            / "references"
+            / "validation-checklist.md"
+        )
+        self.assertTrue(checklist.is_file())
