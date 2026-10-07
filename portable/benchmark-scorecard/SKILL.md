@@ -176,7 +176,7 @@ decision: string
 
 ## Failure and escalation conditions
 
-Do not publish a comparative scorecard when:
+Withhold a comparative scorecard when:
 
 - systems were evaluated on materially different case sets;
 - metric definitions changed between systems;
