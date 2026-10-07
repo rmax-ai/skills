@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "catalog_version": "1.0.0",
+  "catalog_version": "1.1.0",
   "skills": [
     {
       "id": "pydantic-boundary-validation",
@@ -73,6 +73,246 @@
       "provenance": {
         "adr": "rmax-ai/architecture#2",
         "issue": "rmax-ai/delegation-queue#149"
+      }
+    },
+    {
+      "id": "benchmark-design",
+      "name": "Benchmark Design",
+      "description": "Design a benchmark from a real-world capability claim, target distribution, metrics, slices, and validity threats.",
+      "owner": "rmax-ai",
+      "source_path": "portable/benchmark-design",
+      "source_hash": "54f9924733faaf62a71783a9233938c37ec18bdbf547cda6cdd9420341d0b1e0",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "structured evaluation reasoning"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#14",
+        "issue": "rmax-ai/delegation-queue#157"
+      }
+    },
+    {
+      "id": "ground-truth-construction",
+      "name": "Ground-Truth Construction",
+      "description": "Build high-recall benchmark ground truth from heterogeneous discovery sources under a shared adjudication rubric.",
+      "owner": "rmax-ai",
+      "source_path": "portable/ground-truth-construction",
+      "source_hash": "1825519612afc2539af99d2e15131867e82703b56a28dbace969886dc02b354c",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "structured evaluation reasoning"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#14",
+        "issue": "rmax-ai/delegation-queue#157"
+      }
+    },
+    {
+      "id": "eval-rubric-authoring",
+      "name": "Evaluation Rubric Authoring",
+      "description": "Turn a vague quality concept into an operational, versioned rubric with evidence rules and boundary cases.",
+      "owner": "rmax-ai",
+      "source_path": "portable/eval-rubric-authoring",
+      "source_hash": "d0695d53eb5eb4ffee7bbfeab96ae1a3c605a482d1aaab74f1d18735d7b41348",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "structured evaluation reasoning"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#14",
+        "issue": "rmax-ai/delegation-queue#157"
+      }
+    },
+    {
+      "id": "semantic-output-matching",
+      "name": "Semantic Output Matching",
+      "description": "Match open-ended candidate outputs to reference items by semantic equivalence without conflating matching with correctness.",
+      "owner": "rmax-ai",
+      "source_path": "portable/semantic-output-matching",
+      "source_hash": "bdb46e14ab8f8ed48548fb4eb077867dd9aefa481bbb5397fc1b180ed1372419",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "structured evaluation reasoning"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#14",
+        "issue": "rmax-ai/delegation-queue#157"
+      }
+    },
+    {
+      "id": "llm-judge-calibration",
+      "name": "LLM Judge Calibration",
+      "description": "Calibrate automated LLM judgments against human labels and diagnose disagreement by label and benchmark slice.",
+      "owner": "rmax-ai",
+      "source_path": "portable/llm-judge-calibration",
+      "source_hash": "847ba5fd94f5b9fe6f492cb77c4f68852fdf1483bff83dfc2cfbd070f8d9db03",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "structured evaluation reasoning"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#14",
+        "issue": "rmax-ai/delegation-queue#157"
+      }
+    },
+    {
+      "id": "benchmark-scorecard",
+      "name": "Benchmark Scorecard",
+      "description": "Report benchmark quality, coverage, variance, failures, latency, cost, and slices in a reproducible scorecard.",
+      "owner": "rmax-ai",
+      "source_path": "portable/benchmark-scorecard",
+      "source_hash": "afa3386d6c57226799177dea0252b9200a68ef3eabb756583ec9207babce9fb6",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "structured evaluation reasoning"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#14",
+        "issue": "rmax-ai/delegation-queue#157"
+      }
+    },
+    {
+      "id": "benchmark-validity-audit",
+      "name": "Benchmark Validity Audit",
+      "description": "Audit construct, sampling, ground truth, evaluator reliability, contamination, stability, and external validity.",
+      "owner": "rmax-ai",
+      "source_path": "portable/benchmark-validity-audit",
+      "source_hash": "1af67d768924b120833f1eb4a57f192d1186222b2de2b3824b2e5619fddaef5a",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "structured evaluation reasoning"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#14",
+        "issue": "rmax-ai/delegation-queue#157"
+      }
+    },
+    {
+      "id": "benchmark-stability-test",
+      "name": "Benchmark Stability Test",
+      "description": "Stress-test whether benchmark scores, rankings, and decisions survive reasonable methodological perturbations.",
+      "owner": "rmax-ai",
+      "source_path": "portable/benchmark-stability-test",
+      "source_hash": "5202d419d7676343dd1534313c7b1513cefcdb9637063d0070d4d8e3a8478908",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "structured evaluation reasoning"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#14",
+        "issue": "rmax-ai/delegation-queue#157"
+      }
+    },
+    {
+      "id": "novel-finding-adjudication",
+      "name": "Novel Finding Adjudication",
+      "description": "Judge unmatched candidate outputs so novel valid discoveries receive credit without mutating active benchmark denominators.",
+      "owner": "rmax-ai",
+      "source_path": "portable/novel-finding-adjudication",
+      "source_hash": "4b5c5f518d9bc868e9de0322258f159b3b7c2b353340dc0b5cf1b0c267dca8f7",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "structured evaluation reasoning"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#14",
+        "issue": "rmax-ai/delegation-queue#157"
+      }
+    },
+    {
+      "id": "offline-online-validity",
+      "name": "Offline-Online Validity",
+      "description": "Test whether offline benchmark deltas predict real production outcomes and define the benchmark's external-validity domain.",
+      "owner": "rmax-ai",
+      "source_path": "portable/offline-online-validity",
+      "source_hash": "d1b5b344253ef570174542a850785ebd560277aa212b86f20125c9ad9cfae23e",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "structured evaluation reasoning"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#14",
+        "issue": "rmax-ai/delegation-queue#157"
       }
     }
   ],
