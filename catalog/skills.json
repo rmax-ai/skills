@@ -201,7 +201,7 @@
       "description": "Report benchmark quality, coverage, variance, failures, latency, cost, and slices in a reproducible scorecard.",
       "owner": "rmax-ai",
       "source_path": "portable/benchmark-scorecard",
-      "source_hash": "afa3386d6c57226799177dea0252b9200a68ef3eabb756583ec9207babce9fb6",
+      "source_hash": "77d2c5c39c1475d50c67214ec53cf370c00f5b690360ca4824a85cdf14208091",
       "compatibility": {
         "runtimes": [
           "hermes",
