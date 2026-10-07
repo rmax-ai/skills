@@ -201,7 +201,7 @@
       "description": "Report benchmark quality, coverage, variance, failures, latency, cost, and slices in a reproducible scorecard.",
       "owner": "rmax-ai",
       "source_path": "portable/benchmark-scorecard",
-      "source_hash": "77d2c5c39c1475d50c67214ec53cf370c00f5b690360ca4824a85cdf14208091",
+      "source_hash": "bb81708f246bee0357dd0f15614c2b984d843ec8dc838fc30cb93809403b7b48",
       "compatibility": {
         "runtimes": [
           "hermes",
@@ -225,7 +225,7 @@
       "description": "Audit construct, sampling, ground truth, evaluator reliability, contamination, stability, and external validity.",
       "owner": "rmax-ai",
       "source_path": "portable/benchmark-validity-audit",
-      "source_hash": "1af67d768924b120833f1eb4a57f192d1186222b2de2b3824b2e5619fddaef5a",
+      "source_hash": "96dcafbd8cf9e538749063a04f468fe29ff845cdad1d1aa123d92e9d6bb48349",
       "compatibility": {
         "runtimes": [
           "hermes",

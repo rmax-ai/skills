@@ -67,7 +67,9 @@ Name them explicitly, for example:
 - `augmented_precision`;
 - `augmented_recall`.
 
-Flag metrics whose denominator depends on the candidate system.
+Use fixed-reference metrics for cross-system ranking. Flag metrics whose
+denominator depends on the candidate system and treat candidate-dependent
+(augmented) metrics as diagnostic rather than ranking inputs.
 
 ### 3. Compute operational metrics
 

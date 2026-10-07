@@ -47,7 +47,7 @@ Gather as much as exists:
 
 Missing evidence is itself an audit finding.
 
-## Audit dimensions
+## Procedure
 
 ### 1. Construct validity
 
