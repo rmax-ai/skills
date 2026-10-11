@@ -1,7 +1,7 @@
 {
   "id": "rmax-10",
   "runtime": "hermes",
-  "install_root": "<HERMES_HOME>/skills/engineering",
+  "install_root": "~/src/operator-kit/skills/engineering",
   "mode": "copy",
-  "notes": "default Hermes profile; research profile follows via symlink layer"
+  "notes": "default Hermes profile. Catalog skills reach this runtime through `skills.external_dirs` in `~/.hermes/config.yaml`, which points at the operator-kit skills repository. That route replaced `<HERMES_HOME>/skills/engineering` on 2026-10-08; no catalog skill is installed there. The research profile follows the main tree through the `~/.hermes/profiles/research/skills` symlink."
 }
