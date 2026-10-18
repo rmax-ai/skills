@@ -18,6 +18,41 @@ Droid through reviewed pull requests.
 | `tests/probes/` | Manual pinned-toolchain probes (not part of dependency-free CI). |
 | `.github/workflows/ci.yml` | Public, dependency-free CI checks. |
 
+## Agentic development suite (ADR-0014..0022)
+
+The catalog carries one skill per accepted architecture decision for
+agent-developed software. The mapping is 1:1 and is enforced by
+`tests/test_adr_skill_suite.py`: one ADR, one skill, no reused decision number.
+
+| ADR | Portable skill |
+| --- | --- |
+| ADR-0014 | `portable/agent-native-modular-architecture` |
+| ADR-0015 | `portable/python-capability-workspace` |
+| ADR-0016 | `portable/typescript-bun-capability-workspace` |
+| ADR-0017 | `portable/rust-capability-workspace` |
+| ADR-0018 | `portable/affected-polyglot-toolchain` |
+| ADR-0019 | `portable/machine-readable-capability-graph` |
+| ADR-0020 | `portable/change-envelope-planning` |
+| ADR-0021 | `portable/agentic-verification-ladder` |
+| ADR-0022 | `portable/token-efficient-repository-context` |
+
+The suite is layered rather than nine independent essays:
+
+```text
+architecture shape        ADR-0014
+  language layout         ADR-0015 / 0016 / 0017
+  tool + affected graph   ADR-0018
+  ownership graph         ADR-0019
+  change envelopes        ADR-0020
+  verification gates      ADR-0021
+  context economics       ADR-0022
+```
+
+These skills are runtime-neutral guidance only. They declare no dependencies,
+make no network calls, and reach runtimes through the same catalog and profile
+copy-install mechanism as every other entry, so no second distribution path
+exists.
+
 ## Validation
 
 Run the complete offline test suite:
