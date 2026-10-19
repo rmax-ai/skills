@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "catalog_version": "1.1.0",
+  "catalog_version": "1.2.0",
   "skills": [
     {
       "id": "pydantic-boundary-validation",
@@ -313,6 +313,225 @@
       "provenance": {
         "adr": "rmax-ai/architecture#14",
         "issue": "rmax-ai/delegation-queue#157"
+      }
+    },
+    {
+      "id": "agent-native-modular-architecture",
+      "name": "Agent-Native Modular Architecture",
+      "description": "Shape repositories so parallel agents change one capability at a time behind stable contracts, directional dependencies, and expand-and-contract migration.",
+      "owner": "rmax-ai",
+      "source_path": "portable/agent-native-modular-architecture",
+      "source_hash": "30d8042e8c6d58eaa620186cd38ab822b9ecc83b5cdc7a5232af04053b9b7487",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "structured architecture reasoning"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#15 (ADR-0014)",
+        "issue": "rmax-ai/delegation-queue#214"
+      }
+    },
+    {
+      "id": "python-capability-workspace",
+      "name": "Python Capability Workspace",
+      "description": "Lay out agent-developed Python repositories as uv workspaces with one src-layout package per capability, narrow public entry points, ports and adapters, and behavior-oriented tests.",
+      "owner": "rmax-ai",
+      "source_path": "portable/python-capability-workspace",
+      "source_hash": "a87ece0d2174cfd412af5fa3de8857dd824a57316951a4723def7be43b6958c6",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "python>=3.10",
+          "uv"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#15 (ADR-0015)",
+        "issue": "rmax-ai/delegation-queue#214"
+      }
+    },
+    {
+      "id": "typescript-bun-capability-workspace",
+      "name": "TypeScript Bun Capability Workspace",
+      "description": "Lay out agent-developed TypeScript repositories as Bun workspaces with isolated installs, explicit package exports, package-local tests, and a thin orchestration-only root package.",
+      "owner": "rmax-ai",
+      "source_path": "portable/typescript-bun-capability-workspace",
+      "source_hash": "36668ea245e3f38423230a8ad45d23a163c81d970beb1ecaefc0ff137ae2302d",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "bun>=1.2"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#15 (ADR-0016)",
+        "issue": "rmax-ai/delegation-queue#214"
+      }
+    },
+    {
+      "id": "rust-capability-workspace",
+      "name": "Rust Capability Workspace",
+      "description": "Lay out agent-developed Rust repositories as Cargo workspaces where crates map to ownership, public surfaces stay small, and adapter crates isolate volatile integrations.",
+      "owner": "rmax-ai",
+      "source_path": "portable/rust-capability-workspace",
+      "source_hash": "383a8776b28f9b86ecc9bc08e1afabf9d8f7337f48db9e12302f816219119bca",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "rust/cargo>=1.70"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#15 (ADR-0017)",
+        "issue": "rmax-ai/delegation-queue#214"
+      }
+    },
+    {
+      "id": "affected-polyglot-toolchain",
+      "name": "Affected Polyglot Toolchain",
+      "description": "Run one Moon project and task graph across languages with pinned tools, a canonical task vocabulary, affected-only verification, and Buf-managed protobuf contracts.",
+      "owner": "rmax-ai",
+      "source_path": "portable/affected-polyglot-toolchain",
+      "source_hash": "4707b593f52a1b9320b447e6a27c0e340b507713467dd631e0939cb3726eff11",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "moon>=2",
+          "buf>=1"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#15 (ADR-0018)",
+        "issue": "rmax-ai/delegation-queue#214"
+      }
+    },
+    {
+      "id": "machine-readable-capability-graph",
+      "name": "Machine-Readable Capability Graph",
+      "description": "Declare ownership, entry points, contracts, dependencies, risk, and verification per module in local manifests compiled into a queryable graph rather than a hand-edited registry.",
+      "owner": "rmax-ai",
+      "source_path": "portable/machine-readable-capability-graph",
+      "source_hash": "d7d6640498f00245cb4df3fe328ee0d24e58eaf561ce64ef356520e7f20685e5",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "repository-local manifests",
+          "yaml"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#15 (ADR-0019)",
+        "issue": "rmax-ai/delegation-queue#214"
+      }
+    },
+    {
+      "id": "change-envelope-planning",
+      "name": "Change Envelope Planning",
+      "description": "Classify a planned change as L0-L3, resolve it to an immutable envelope, and schedule parallel agent work by mutation and semantic overlap instead of optimism.",
+      "owner": "rmax-ai",
+      "source_path": "portable/change-envelope-planning",
+      "source_hash": "19faf76b6ebd98f47718b95f4c80175c12fea5f4f5e7a78262668d07addad2f2",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "durable task contract"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#15 (ADR-0020)",
+        "issue": "rmax-ai/delegation-queue#214"
+      }
+    },
+    {
+      "id": "agentic-verification-ladder",
+      "name": "Agentic Verification Ladder",
+      "description": "Select V0-V5 verification gates from change class and the affected graph, test behavior and contracts instead of implementation shape, and emit compact machine-readable evidence.",
+      "owner": "rmax-ai",
+      "source_path": "portable/agentic-verification-ladder",
+      "source_hash": "4412cc296f0a4f953b4c54efc20c582556ba688c58788251281de15121937d09",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "affected project graph"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#15 (ADR-0021)",
+        "issue": "rmax-ai/delegation-queue#214"
+      }
+    },
+    {
+      "id": "token-efficient-repository-context",
+      "name": "Token-Efficient Repository Context",
+      "description": "Construct agent context architecture-first with progressive disclosure and question-driven expansion, excluding generated files, and hand off evidence plus durable references.",
+      "owner": "rmax-ai",
+      "source_path": "portable/token-efficient-repository-context",
+      "source_hash": "f9ea59c4949df101969e9124ffa7e48f66fad1d9f6498d9cb7d8b4dd93b2cd64",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "repository metadata or project graph"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#15 (ADR-0022)",
+        "issue": "rmax-ai/delegation-queue#214"
       }
     }
   ],
