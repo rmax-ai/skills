@@ -54,6 +54,15 @@ make no network calls, and reach runtimes through the same catalog and profile
 copy-install mechanism as every other entry, so no second distribution path
 exists.
 
+## Test ownership and topology (ADR-0025)
+
+`portable/agentic-test-topology` places tests and fixtures with their owning
+module, capability, repository contract, or system boundary. It covers
+relocation and affected-target execution without redefining verification
+sufficiency; ADR-0023 remains authoritative for claim-driven verification.
+The cataloged skill reaches `rmax-10` through the existing profile and
+materialization route.
+
 ## Validation
 
 Run the complete offline test suite:

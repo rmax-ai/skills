@@ -557,6 +557,30 @@
         "adr": "rmax-ai/architecture#18 (ADR-0023)",
         "issue": "rmax-ai/delegation-queue#223"
       }
+    },
+    {
+      "id": "agentic-test-topology",
+      "name": "Agentic Test Ownership and Topology",
+      "description": "Place tests and fixtures at their owning boundary, preserve ownership during relocation, and expand execution to affected test owners.",
+      "owner": "rmax-ai",
+      "source_path": "portable/agentic-test-topology",
+      "source_hash": "096870def1179759afa12fe09668a09de68ceea1323e1dae6c17ed48b23e13c0",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "repository ownership and dependency graph"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture ADR-0025",
+        "issue": "rmax-ai/delegation-queue#216"
+      }
     }
   ],
   "hash_rule": "source_hash = sha256 over sorted lines '<posix_relpath> <sha256(file_hex)>\\n' for all files under source_path, sorted by relpath"
