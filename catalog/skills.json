@@ -533,6 +533,30 @@
         "adr": "rmax-ai/architecture#15 (ADR-0022)",
         "issue": "rmax-ai/delegation-queue#214"
       }
+    },
+    {
+      "id": "claim-driven-software-verification",
+      "name": "Claim-Driven Software Verification",
+      "description": "Map software claims to verification obligations by risk, select evidence across affected scope, and record decisions with residual risk.",
+      "owner": "rmax-ai",
+      "source_path": "portable/claim-driven-software-verification",
+      "source_hash": "d0a235d77130b7851a97bc9a7104ef992d96e69dea1100e6b6900d37c73de193",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "affected project graph"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#18 (ADR-0023)",
+        "issue": "rmax-ai/delegation-queue#223"
+      }
     }
   ],
   "hash_rule": "source_hash = sha256 over sorted lines '<posix_relpath> <sha256(file_hex)>\\n' for all files under source_path, sorted by relpath"
