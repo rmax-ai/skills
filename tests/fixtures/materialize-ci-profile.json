@@ -1,0 +1,6 @@
+{
+  "id": "ci-isolated",
+  "runtime": "hermes",
+  "install_root": "<HERMES_HOME>/skills",
+  "mode": "copy"
+}

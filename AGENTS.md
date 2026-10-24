@@ -23,12 +23,20 @@ Before handing off a change, run:
 ```sh
 python3 -m unittest discover -s tests -v
 python3 scripts/catalog_check.py check
-python3 scripts/catalog_check.py --hash portable/pydantic-boundary-validation
-python3 scripts/catalog_check.py --hash portable/zod-boundary-validation
 python3 -m compileall -q scripts tests
 git diff --check
 git status --short
+HERMES_HOME="$(mktemp -d)"
+export HERMES_HOME
+profile=tests/fixtures/materialize-ci-profile.json
+python3 scripts/materialize.py --profile "$profile" --source .
+python3 scripts/materialize.py --profile "$profile" --source . --apply
+python3 scripts/materialize.py --profile "$profile" --source . --check
 ```
+
+`catalog_check.py check` verifies stored source hashes for every catalog entry.
+Use `catalog_check.py --hash DIR` to compute a replacement digest when updating
+catalog metadata; it is not an additional validation check.
 
 Also inspect line counts and confirm that unfinished-work markers are absent.
 

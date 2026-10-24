@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -18,3 +20,21 @@ jobs:
         run: python3 -m unittest discover -s tests -v
       - name: Check catalog
         run: python3 scripts/catalog_check.py check
+      - name: Compile Python files
+        run: python3 -m compileall -q scripts tests
+      - name: Check patch whitespace
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '0000000000000000000000000000000000000000' }}
+        run: |
+          if [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            git diff --check --root "$GITHUB_SHA"
+          else
+            git diff --check "$BASE_SHA" "$GITHUB_SHA"
+          fi
+      - name: Exercise materializer in disposable HERMES_HOME
+        run: |
+          export HERMES_HOME="$(mktemp -d)"
+          profile=tests/fixtures/materialize-ci-profile.json
+          python3 scripts/materialize.py --profile "$profile" --source .
+          python3 scripts/materialize.py --profile "$profile" --source . --apply
+          python3 scripts/materialize.py --profile "$profile" --source . --check
