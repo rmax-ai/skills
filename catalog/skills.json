@@ -557,6 +557,30 @@
         "adr": "rmax-ai/architecture#18 (ADR-0023)",
         "issue": "rmax-ai/delegation-queue#223"
       }
+    },
+    {
+      "id": "probabilistic-agent-evaluation",
+      "name": "Probabilistic Agent Evaluation",
+      "description": "Measure stochastic agent reliability with repeated trials, calibrated graders, explicit uncertainty, and integrated verification evidence.",
+      "owner": "rmax-ai",
+      "source_path": "portable/probabilistic-agent-evaluation",
+      "source_hash": "bb23d789a9854f48fadd8fba6d2474a47a04b39d883ec4821d89b5de036e9f51",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "repeated-sample evaluation"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "rmax-ai/architecture#18 (ADR-0026)",
+        "issue": "rmax-ai/delegation-queue#224"
+      }
     }
   ],
   "hash_rule": "source_hash = sha256 over sorted lines '<posix_relpath> <sha256(file_hex)>\\n' for all files under source_path, sorted by relpath"
