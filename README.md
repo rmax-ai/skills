@@ -61,12 +61,38 @@ Run the complete offline test suite:
 ```sh
 python3 -m unittest discover -s tests -v
 python3 scripts/catalog_check.py check
-python3 scripts/materialize.py --check --profile profiles/<x>.json --source .
+python3 -m compileall -q scripts tests
+git diff --check
 ```
 
-The materializer is a dry run unless `--apply` is supplied. Profiles may use
-runtime-specific home placeholders, so configure those placeholders before a
-check or install.
+Exercise the materializer with an isolated home. The `--apply` step seeds the
+disposable install so `--check` can verify it:
+
+```sh
+HERMES_HOME="$(mktemp -d)"
+export HERMES_HOME
+profile=tests/fixtures/materialize-ci-profile.json
+python3 scripts/materialize.py --profile "$profile" --source .
+python3 scripts/materialize.py --profile "$profile" --source . --apply
+python3 scripts/materialize.py --profile "$profile" --source . --check
+```
+
+`catalog_check.py check` validates stored source hashes for every catalog
+entry. Use `catalog_check.py --hash DIR` to compute a replacement digest when
+updating catalog metadata, not as a separate validation check. CI checks patch
+whitespace against the pull-request or push base and exercises this materializer
+sequence in a fresh temporary `HERMES_HOME`.
+
+### Private-marker scan scope
+
+The catalog validator scans `catalog/skills.json` and files in each catalogued
+source under `portable/`. It is not a repository-wide scan: paths such as
+`profiles/`, `scripts/`, `tests/`, this README, and `.github/` are outside its
+scope. This boundary keeps the gate focused on catalogued skill inputs;
+repository-wide scanning would also inspect marker fixtures, validation
+tooling, and documentation that describes marker patterns. This is a documented
+coverage gap, not a claim that the excluded paths are marker-free. Broader
+coverage needs a separately scoped scan policy and false-positive handling.
 
 Pinned probes are manual, require a network install of the pinned toolchain,
 and are not part of CI:
