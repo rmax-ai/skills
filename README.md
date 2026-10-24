@@ -36,6 +36,7 @@ agent-developed software. The mapping is 1:1 and is enforced by
 | ADR-0021 | `portable/agentic-verification-ladder` |
 | ADR-0022 | `portable/token-efficient-repository-context` |
 | ADR-0023 | `portable/claim-driven-software-verification` |
+| ADR-0026 | `portable/probabilistic-agent-evaluation` |
 
 The suite is layered rather than nine independent essays:
 
