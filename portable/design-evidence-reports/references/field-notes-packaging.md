@@ -38,6 +38,12 @@ be a separate catalog change, not a silent claim in this entry.
   this change. A blanket `--apply` would overwrite the operator-kit copy with
   the older portable revision, so refresh must stay scoped to the new skill id
   until the pydantic drift is reconciled by its owner.
-- A new catalog entry therefore does **not** reach the Hermes loader on its own.
+- Observed while validating this skill: a temporary copy placed directly under
+`~<hermes-home>/skills/engineering/<id>` *is* reachable by a fresh session (that
+is how the behavioral cases ran), but it is a second runtime copy — it defeats
+the single-exposure intent and will shadow or be shadowed by the operator-kit
+copy once the refresh lands. Remove it after the refresh.
+
+A new catalog entry therefore does **not** reach the Hermes loader on its own.
   Publication is two steps: merge the portable revision, then refresh the copy
   in operator-kit. Both are operator-owned.
