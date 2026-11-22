@@ -557,6 +557,31 @@
         "adr": "rmax-ai/architecture#18 (ADR-0023)",
         "issue": "rmax-ai/delegation-queue#223"
       }
+    },
+    {
+      "id": "design-evidence-reports",
+      "name": "Design Evidence Reports",
+      "description": "Design or review visual reports so chart, flow, timeline, table and page form serve the reader's question without distorting units, cohorts, denominators or uncertainty; inspect the complete rendered page and return separate content, rendering and design judgments.",
+      "owner": "rmax-ai",
+      "source_path": "portable/design-evidence-reports",
+      "source_hash": "05adc8f12b37c1243333a70e1042003e4017eefeb47e6e6d65e4a6a0eec93e04",
+      "compatibility": {
+        "runtimes": [
+          "hermes",
+          "codex",
+          "droid"
+        ],
+        "required_capabilities": [
+          "structured visual-report reasoning",
+          "rendered-page inspection"
+        ],
+        "network": false
+      },
+      "version": "1.0.0",
+      "provenance": {
+        "adr": "case-derived: no architecture decision record; origin rmax-ai/rmax-ai.github.io#107",
+        "issue": "rmax-ai/delegation-queue#357"
+      }
     }
   ],
   "hash_rule": "source_hash = sha256 over sorted lines '<posix_relpath> <sha256(file_hex)>\\n' for all files under source_path, sorted by relpath"
